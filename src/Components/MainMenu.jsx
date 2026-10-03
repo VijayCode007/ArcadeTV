@@ -1,16 +1,17 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
-function List({ menuText }) {
+function List({ navLinksObj}) {
   return (
     <>
-      {menuText.map((menuItem, index) => (
+      {navLinksObj.map((link) => (
         <li
-          key={`${menuItem}-${index}`}
+          key={link.id}
           className="flex items-center justify-center bg-amber-900 p-1 hover:text-4xl transition-text duration-100"
         >
-          <a href="" className="">
-            {menuItem}
-          </a>
+          {/* solve this link issue */}
+          <Link to={link.path}>{link.title}</Link>
+      
         </li>
       ))}
     </>
@@ -18,10 +19,15 @@ function List({ menuText }) {
 }
 
 function MainMenu() {
-  let menuText = ["Play Games", "Watch TV", "How to Use", "Credits"];
+  const navLinks=[
+    {id:1,title:"Play Games",path:"/games"},
+    {id:2,title:"Watch TV",path:"television"},
+    {id:3,title:"How to Use",path:"help"},
+    {id:4,title:"Credits",path:"credits"}
+  ]
   return (
     <ul className="flex flex-col w-1/4 p-2 bg-black gap-2 text-3xl text-white">
-      <List menuText={menuText} />
+      <List navLinksObj={navLinks}/>
     </ul>
   );
 }
